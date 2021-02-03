@@ -1,0 +1,81 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="ocio.list">
+      <field name="name">ocio list</field>
+      <field name="model">ocio.municipio</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="nombre"/>
+          <field name="cod_prov"/>
+          <field name="cod_mun"/>
+          <field name="cod_postal"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="ocio.form">
+      <field name="name">ocio form</field>
+      <field name="model">ocio.municipio</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <field name="nombre"/>
+            <field name="cod_prov"/>
+            <field name="cod_mun"/>
+            <field name="cod_postal"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="ocio.municipio_action_window">
+      <field name="name">Municipio window</field>
+      <field name="res_model">ocio.municipio</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="ocio.action_server">
+      <field name="name">ocio server</field>
+      <field name="model_id" ref="model_ocio_ocio"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+
+    <menuitem name="ocio" id="ocio.menu_root"/>
+
+    <!-- menu categories -->
+    <menuitem name="Municipio" id="ocio.municipio_menu_1" parent="ocio.menu_root" action="ocio.municipio_action_window"/>
+<!--
+    <menuitem name="Menu 1" id="ocio.menu_1" parent="ocio.menu_root"/>
+    <menuitem name="Menu 2" id="ocio.menu_2" parent="ocio.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="ocio.menu_1_list" parent="ocio.menu_1"
+              action="ocio.action_window"/>
+    <menuitem name="Server to list" id="ocio" parent="ocio.menu_2"
+              action="ocio.action_server"/>
+-->
+  </data>
+</odoo>
+
+
+
