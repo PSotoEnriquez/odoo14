@@ -39,6 +39,19 @@
                 </tree>
             </field>
         </record>
+        <!-- modelo convivencia -->
+        <record model="ir.ui.view" id="ocio.convivencia_list">
+            <field name="name">Convivencia lista</field>
+            <field name="model">ocio.convivencia</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="nombre"/>
+                    <field name="empleados"/>
+                    <field name="playa"/>
+                    <field name="precio_persona"/>
+                </tree>
+            </field>
+        </record>
 
         <!-- ################################################################################# -->
 
@@ -132,7 +145,7 @@
 
         <!--  [[[[ ACCIONES ]]]] -->
 
-        <!-- Definición de una acción sobre el modelo (en este caso sobre municipio) -->
+        <!-- Definición de una acción sobre el modelo (en este caso sobre PLayas) -->
         <record model="ir.actions.act_window" id="ocio.playa_action_window">
             <field name="name">Playas</field>
             <field name="res_model">ocio.playa</field>
@@ -144,7 +157,12 @@
             <field name="res_model">ocio.municipio</field>
             <field name="view_mode">tree,form</field>
         </record>
-
+        <!-- Definición de una acción sobre el modelo convivencia -->
+        <record model="ir.actions.act_window" id="ocio.convivencia_action_window">
+            <field name="name">Convivencias</field>
+            <field name="res_model">ocio.convivencia</field>
+            <field name="view_mode">tree,form</field>
+        </record>
 
         <!-- ################################################################################# -->
 
@@ -157,6 +175,7 @@
         <menuitem name="Municipios" id="ocio.municipios_menu_1" parent="ocio.menu_root"
                   action="ocio.municipio_action_window"/>
         <menuitem name="Playas" id="ocio.playas_menu_1" parent="ocio.menu_root" action="ocio.playa_action_window"/>
+        <menuitem name="Convivencia" id="ocio.convivencia_menu_1" parent="ocio.menu_root" action="ocio.convivencia_action_window"/>
 
 
         <!-- ################################################################################# -->
