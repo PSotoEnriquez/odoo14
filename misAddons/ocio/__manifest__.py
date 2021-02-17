@@ -3,14 +3,14 @@
     'name': "ocio",
 
     'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+        Módulo de ejemplo para la introducción a creación de módulos
+        en el SGE/ERP odoo14""",
 
     'description': """
-        Long description of module's purpose
+        Módulo para la recogida de datos de las actividades de ocio que realizan los empleados.
     """,
 
-    'author': "My Company",
+    'author': "Pedro Soto",
     'website': "http://www.yourcompany.com",
 
     # Categories can be used to filter modules in modules listing
@@ -24,7 +24,8 @@
 
     # always loaded
     'data': [
-        #'security/ir.model.access.csv',
+        'security/security.xml',
+        'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
     ],

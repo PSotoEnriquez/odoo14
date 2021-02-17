@@ -1,0 +1,12 @@
+<odoo>
+    <data>
+        <record id="ocio_manager" model="res.groups">
+            <field name="name">Responsable</field>
+        </record>
+        <record id="ocio_user" model="res.groups">
+            <field name="name">Usuario básico</field>
+        </record>
+    </data>
+</odoo>
+
+

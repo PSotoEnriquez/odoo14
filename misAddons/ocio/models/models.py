@@ -15,9 +15,18 @@ class Municipio(models.Model):
     _description = 'Este modelo almacenará informacion de las municipios de Cádiz'
 
     nombre = fields.Char(string='Nombre municipio', size=50, required=True)
+    habitantes = fields.Integer(string='Nº Habitantes')
     cod_prov = fields.Integer(string='Codigo provincia')
     cod_mun = fields.Integer(string='Codigo municipio')
     cod_postal = fields.Integer(string='Codigo postal')
+    playas = fields.One2many("ocio.playa", "poblacion", string="Playas")
+    # campo calculado
+    n_playas = fields.Integer(string='Nº total playas', compute="calculaplayas", store=True)
+
+    @api.depends('playas')
+    def calculaplayas(self):
+        for municipio in self:
+            municipio.n_playas = len(self.playas)
 
 
 class Playa(models.Model):
@@ -29,4 +38,16 @@ class Playa(models.Model):
     anchura = fields.Char(string='Anchura playa')
     interes = fields.Char(string='Interés')
     nudista = fields.Boolean(string='¿Es nudista?')
-    poblacion = fields.Many2one('ocio.municipio', string='Poblacion')
+    poblacion = fields.Many2one('ocio.municipio', string='Poblacion', required=True, ondelete="cascade")
+    # si borramos un pueblo se borran todas las playas.
+
+
+class Convivencia(models.Model):
+    _name = 'ocio.convivencia'
+    _description = 'Este modelo almacenará informacion de las convivencias de los empleados.'
+
+    nombre = fields.Char(string='Nombre convivencia')
+    empleados = fields.Many2many('hr.employee', string='Employee', index=True)
+    playa = fields.Many2one('ocio.playa', string="Playa")
+    precio_persona = fields.Float(string='Precio')
+

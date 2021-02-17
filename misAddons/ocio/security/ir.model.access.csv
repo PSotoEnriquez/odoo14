@@ -1,2 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_ocio_ocio,ocio.ocio,ocio.municipio,base.group_user,1,1,1,1
+access_ocio_municipio_todos,ocio.municipio,model_ocio_municipio,ocio_manager,1,1,1,1
+access_ocio_playa_todos,ocio.playa,model_ocio_playa,ocio_manager,1,1,1,1
+
+access_ocio_municipio_ninguno,ocio.municipio,model_ocio_municipio,ocio_user,1,0,0,0
+access_ocio_playa_ninguno,ocio.playa,model_ocio_playa,ocio_user,1,0,0,0

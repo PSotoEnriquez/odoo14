@@ -1,80 +1,182 @@
 <odoo>
-  <data>
-    <!-- explicit list view definition -->
+    <data>
 
-    <record model="ir.ui.view" id="ocio.list">
-      <field name="name">ocio list</field>
-      <field name="model">ocio.municipio</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="nombre"/>
-          <field name="cod_prov"/>
-          <field name="cod_mun"/>
-          <field name="cod_postal"/>
-        </tree>
-      </field>
-    </record>
+        <!-- [[[[ Vistas tipo <<LISTA>> ]]]] -->
+        <!-- modelo municipio -->
+        <record model="ir.ui.view" id="ocio.municipio_list">
+            <field name="name">Municipio lista</field>
+            <field name="model">ocio.municipio</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="nombre"/>
+                    <field name="habitantes"/>
+                    <field name="cod_prov"/>
+                    <field name="cod_mun"/>
+                    <field name="cod_postal"/>
+                    <field name="n_playas"/>
+                    <field name="playas">
+                        <tree>
+                            <field name="nombre"/>
+                            <field name="composicion"/>
+                            <field name="anchura"/>
+                        </tree>
+                    </field>
+                </tree>
+            </field>
+        </record>
+        <!-- modelo playa -->
+        <record model="ir.ui.view" id="ocio.playa_list">
+            <field name="name">Playa lista</field>
+            <field name="model">ocio.playa</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="nombre"/>
+                    <field name="composicion"/>
+                    <field name="anchura"/>
+                    <field name="interes"/>
+                    <field name="nudista"/>
+                    <field name="poblacion"/>
+                </tree>
+            </field>
+        </record>
 
-    <record model="ir.ui.view" id="ocio.form">
-      <field name="name">ocio form</field>
-      <field name="model">ocio.municipio</field>
-      <field name="arch" type="xml">
-        <form>
-          <group>
-            <field name="nombre"/>
-            <field name="cod_prov"/>
-            <field name="cod_mun"/>
-            <field name="cod_postal"/>
-          </group>
-        </form>
-      </field>
-    </record>
+        <!-- ################################################################################# -->
+
+        <!--[[[[ Vistas tipo <<FORM>>  ]]]]-->
+        <!-- modelo municipio -->
+        <record model="ir.ui.view" id="ocio.municipio_form">
+            <field name="name">Municipio form</field>
+            <field name="model">ocio.municipio</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="nombre"/>
+                        <field name="habitantes"/>
+                        <field name="cod_prov"/>
+                        <field name="cod_mun"/>
+                        <field name="cod_postal"/>
+                        <field name="playas">
+                            <tree>
+                                <field name="nombre"/>
+                                <field name="composicion"/>
+                                <field name="anchura"/>
+                            </tree>
+                        </field>
+                    </group>
+                </form>
+            </field>
+        </record>
+        <!-- modelo playa -->
+        <record model="ir.ui.view" id="ocio.playa_form">
+            <field name="name">Playa form</field>
+            <field name="model">ocio.playa</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="nombre"/>
+                        <field name="composicion"/>
+                        <field name="anchura"/>
+                        <field name="interes"/>
+                        <field name="nudista"/>
+                        <field name="poblacion"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- ################################################################################# -->
+
+        <!--[[[[ Vistas tipo <<BÚSQUEDA>>  ]]]]-->
+        <!-- modelo municipio -->
+        <record model="ir.ui.view" id="ocio.municipio_search">
+            <field name="name">Municipio search</field>
+            <field name="model">ocio.municipio</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="nombre"/>
+                    <field name="cod_postal"/>
+                    <filter name="menor de 10.000 hab" domain="[('habitantes', '&lt;', '10000')]"/>
+                </search>
+            </field>
+        </record>
+        <!-- modelo playa -->
+        <record model="ir.ui.view" id="ocio.municipio_search">
+            <field name="name">Municipio search</field>
+            <field name="model">ocio.municipio</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="nombre"/>
+                    <field name="cod_postal"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- ################################################################################# -->
+
+        <!--[[[[ Vistas tipo <<KANBAN>>  ]]]]-->
+        <!-- modelo playa -->
+        <record model="ir.ui.view" id="ocio.playa_kanban" >
+            <field name="name">Playa kanban </field>
+            <field name="model">ocio.playa</field>
+            <field name="arch" type="xml">
+                <kanban>
+                        <field name="nombre"/>
+                        <field name="composicion"/>
+                        <field name="anchura"/>
+                        <field name="interes"/>
+                        <field name="nudista"/>
+                        <field name="poblacion"/>
+                </kanban>
+            </field>
+        </record>
+
+        <!--  [[[[ ACCIONES ]]]] -->
+
+        <!-- Definición de una acción sobre el modelo (en este caso sobre municipio) -->
+        <record model="ir.actions.act_window" id="ocio.playa_action_window">
+            <field name="name">Playas</field>
+            <field name="res_model">ocio.playa</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!-- Definición de una acción sobre el modelo (en este caso sobre municipio) -->
+        <record model="ir.actions.act_window" id="ocio.municipio_action_window">
+            <field name="name">Municipios</field>
+            <field name="res_model">ocio.municipio</field>
+            <field name="view_mode">tree,form</field>
+        </record>
 
 
+        <!-- ################################################################################# -->
 
-    <!-- actions opening views on models -->
+        <!-- [[[[ menús ]]]] -->
 
-    <record model="ir.actions.act_window" id="ocio.municipio_action_window">
-      <field name="name">Municipio window</field>
-      <field name="res_model">ocio.municipio</field>
-      <field name="view_mode">tree,form</field>
-    </record>
+        <!-- Menú general del módulo  -->
+        <menuitem name="Ocio" id="ocio.menu_root"/>
+        <!-- menu categories -->
+        <!-- Submenús del menú Ocio -->
+        <menuitem name="Municipios" id="ocio.municipios_menu_1" parent="ocio.menu_root"
+                  action="ocio.municipio_action_window"/>
+        <menuitem name="Playas" id="ocio.playas_menu_1" parent="ocio.menu_root" action="ocio.playa_action_window"/>
 
 
-    <!-- server action to the one above -->
-<!--
-    <record model="ir.actions.server" id="ocio.action_server">
-      <field name="name">ocio server</field>
-      <field name="model_id" ref="model_ocio_ocio"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
-      </field>
-    </record>
--->
+        <!-- ################################################################################# -->
+        <!-- server action to the one above -->
+        <!--
+            <record model="ir.actions.server" id="ocio.action_server">
+              <field name="name">ocio server</field>
+              <field name="model_id" ref="model_ocio_ocio"/>
+              <field name="state">code</field>
+              <field name="code">
+                action = {
+                  "type": "ir.actions.act_window",
+                  "view_mode": "tree,form",
+                  "res_model": model._name,
+                }
+              </field>
+            </record>
+        -->
 
-    <!-- Top menu item -->
-
-    <menuitem name="ocio" id="ocio.menu_root"/>
-
-    <!-- menu categories -->
-    <menuitem name="Municipio" id="ocio.municipio_menu_1" parent="ocio.menu_root" action="ocio.municipio_action_window"/>
-<!--
-    <menuitem name="Menu 1" id="ocio.menu_1" parent="ocio.menu_root"/>
-    <menuitem name="Menu 2" id="ocio.menu_2" parent="ocio.menu_root"/>
--->
-    <!-- actions -->
-<!--
-    <menuitem name="List" id="ocio.menu_1_list" parent="ocio.menu_1"
-              action="ocio.action_window"/>
-    <menuitem name="Server to list" id="ocio" parent="ocio.menu_2"
-              action="ocio.action_server"/>
--->
-  </data>
+    </data>
 </odoo>
 
 
